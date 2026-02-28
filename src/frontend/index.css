@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.375rem;
+
+    /* SANNARI ERP - Professional Blue/Dark Theme */
+    --background: 0.976 0.003 247.858;
+    --foreground: 0.21 0.034 264.665;
+    --card: 1 0 0;
+    --card-foreground: 0.21 0.034 264.665;
+    --popover: 1 0 0;
+    --popover-foreground: 0.21 0.034 264.665;
+
+    /* Primary: #1e40af - deep blue */
+    --primary: 0.379 0.146 265.522;
+    --primary-foreground: 0.985 0 0;
+
+    --secondary: 0.945 0.018 247.858;
+    --secondary-foreground: 0.379 0.146 265.522;
+
+    --muted: 0.945 0.012 247.858;
+    --muted-foreground: 0.556 0.02 264.665;
+
+    --accent: 0.918 0.025 247.858;
+    --accent-foreground: 0.21 0.034 264.665;
+
+    /* Destructive: #dc2626 */
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    --border: 0.898 0.02 247.858;
+    --input: 0.898 0.02 247.858;
+    --ring: 0.379 0.146 265.522;
+
+    /* Charts */
+    --chart-1: 0.379 0.146 265.522;
+    --chart-2: 0.44 0.161 142.5;
+    --chart-3: 0.577 0.245 27.325;
+    --chart-4: 0.596 0.196 59.339;
+    --chart-5: 0.55 0.18 300;
+
+    /* Sidebar: #0f172a */
+    --sidebar: 0.158 0.032 264.665;
+    --sidebar-foreground: 0.92 0.012 264.665;
+    --sidebar-primary: 0.44 0.16 265.522;
+    --sidebar-primary-foreground: 0.985 0 0;
+    --sidebar-accent: 0.21 0.034 264.665;
+    --sidebar-accent-foreground: 0.92 0.012 264.665;
+    --sidebar-border: 0.25 0.04 264.665;
+    --sidebar-ring: 0.44 0.16 265.522;
+
+    /* ERP custom tokens */
+    --erp-success: 0.44 0.161 142.5;
+    --erp-warning: 0.64 0.189 59.339;
+    --erp-danger: 0.577 0.245 27.325;
+    --erp-sidebar-width: 240px;
+    --erp-sidebar-collapsed: 60px;
+    --erp-header-height: 64px;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ERP Table styles */
+  .erp-table th {
+    @apply bg-slate-50 text-slate-600 font-semibold text-xs uppercase tracking-wide;
+    padding: 10px 16px;
+    border-bottom: 1px solid oklch(var(--border));
+  }
+
+  .erp-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid oklch(var(--border));
+    font-size: 13px;
+  }
+
+  .erp-table tr:hover td {
+    background-color: oklch(0.976 0.003 247.858);
+  }
+
+  /* Sale row highlight */
+  .row-sale td {
+    background-color: oklch(0.97 0.02 142.5 / 0.3) !important;
+  }
+  .row-purchase td {
+    background-color: oklch(0.97 0.02 27.325 / 0.3) !important;
+  }
+  .row-expense td {
+    background-color: oklch(0.97 0.03 59.339 / 0.3) !important;
+  }
+
+  /* Print styles */
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+    .print-only {
+      display: block !important;
+    }
+    body {
+      background: white;
+    }
+  }
+
+  .print-only {
+    display: none;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.7 0.02 247.858);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.5 0.04 247.858);
+  }
+}
