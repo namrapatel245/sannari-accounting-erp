@@ -1,8 +1,7 @@
 import { format, parseISO } from "date-fns";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
-import { Loader2, MessageCircle, Printer, X } from "lucide-react";
-import { useRef, useState } from "react";
+import { MessageCircle, Printer, X } from "lucide-react";
+import { useRef } from "react";
+import { createPortal } from "react-dom";
 import { toast } from "sonner";
 import { useStore } from "../store";
 import type { Sale, Settings } from "../types";
@@ -17,13 +16,66 @@ interface PrintInvoiceProps {
 export function PrintInvoice({ sale, settings, onClose }: PrintInvoiceProps) {
   const { customers } = useStore();
   const invoiceRef = useRef<HTMLDivElement>(null);
-  const [isGenerating, setIsGenerating] = useState(false);
 
   function handlePrint() {
-    window.print();
+    const element = document.getElementById("print-invoice-content");
+    if (!element) {
+      toast.error("Invoice content not found.");
+      return;
+    }
+
+    const printWindow = window.open("", "_blank", "width=900,height=700");
+    if (!printWindow) {
+      toast.error(
+        "Pop-up blocked. Please allow pop-ups for this site and try again.",
+      );
+      return;
+    }
+
+    const styles = Array.from(document.styleSheets)
+      .map((sheet) => {
+        try {
+          return Array.from(sheet.cssRules)
+            .map((rule) => rule.cssText)
+            .join("\n");
+        } catch {
+          return "";
+        }
+      })
+      .join("\n");
+
+    printWindow.document.write(`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Invoice ${sale.billNumber}</title>
+  <style>
+    ${styles}
+    body { margin: 0; padding: 0; background: white; font-family: sans-serif; }
+    @page { margin: 10mm; }
+    @media print {
+      body { margin: 0; padding: 0; }
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  ${element.outerHTML}
+</body>
+</html>`);
+    printWindow.document.close();
+
+    // Wait for images/fonts to load before printing
+    printWindow.onload = () => {
+      setTimeout(() => {
+        printWindow.focus();
+        printWindow.print();
+        printWindow.close();
+      }, 500);
+    };
   }
 
-  async function handleWhatsApp() {
+  function handleWhatsApp() {
     // Determine phone: customerMobile on sale > customer phone > settings whatsappNumber
     const customer = customers.find((c) => c.id === sale.customerId);
     const phone =
@@ -36,67 +88,69 @@ export function PrintInvoice({ sale, settings, onClose }: PrintInvoiceProps) {
       return;
     }
 
-    setIsGenerating(true);
-    try {
-      const element = document.getElementById("print-invoice-content");
-      if (!element) {
-        toast.error("Invoice content not found.");
-        setIsGenerating(false);
-        return;
-      }
-
-      // Capture invoice as canvas
-      const canvas = await html2canvas(element, {
-        scale: 2,
-        useCORS: true,
-        backgroundColor: "#ffffff",
-        logging: false,
-      });
-
-      // Convert canvas to PDF
-      const imgData = canvas.toDataURL("image/jpeg", 0.95);
-      const pdf = new jsPDF({
-        orientation: "portrait",
-        unit: "mm",
-        format: "a4",
-      });
-
-      const pageWidth = pdf.internal.pageSize.getWidth();
-      const pageHeight = pdf.internal.pageSize.getHeight();
-      const imgWidth = pageWidth;
-      const imgHeight = (canvas.height * pageWidth) / canvas.width;
-
-      let heightLeft = imgHeight;
-      let position = 0;
-
-      pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-
-      while (heightLeft > 0) {
-        position = heightLeft - imgHeight;
-        pdf.addPage();
-        pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-      }
-
-      // Download the PDF
-      const fileName = `Invoice-${sale.billNumber}.pdf`;
-      pdf.save(fileName);
-
-      // Open WhatsApp with customer's number
-      const cleanPhone = phone.replace(/\D/g, "");
-      const waUrl = `https://wa.me/${cleanPhone}`;
-      window.open(waUrl, "_blank", "noopener,noreferrer");
-
-      toast.success(
-        `PDF downloaded as "${fileName}". Open WhatsApp to send it to the customer.`,
-      );
-    } catch (err) {
-      console.error("PDF generation error:", err);
-      toast.error("Failed to generate PDF. Please try again.");
-    } finally {
-      setIsGenerating(false);
+    const element = document.getElementById("print-invoice-content");
+    if (!element) {
+      toast.error("Invoice content not found.");
+      return;
     }
+
+    // Open a print window — user saves as PDF, then we open WhatsApp
+    const printWindow = window.open("", "_blank", "width=900,height=700");
+    if (!printWindow) {
+      toast.error(
+        "Pop-up blocked. Please allow pop-ups for this site and try again.",
+      );
+      return;
+    }
+
+    const styles = Array.from(document.styleSheets)
+      .map((sheet) => {
+        try {
+          return Array.from(sheet.cssRules)
+            .map((rule) => rule.cssText)
+            .join("\n");
+        } catch {
+          return "";
+        }
+      })
+      .join("\n");
+
+    printWindow.document.write(`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Invoice ${sale.billNumber}</title>
+  <style>
+    ${styles}
+    body { margin: 0; padding: 0; background: white; font-family: sans-serif; }
+    @page { margin: 10mm; }
+    @media print {
+      body { margin: 0; padding: 0; }
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  ${element.outerHTML}
+</body>
+</html>`);
+    printWindow.document.close();
+
+    // After print dialog, open WhatsApp
+    const cleanPhone = phone.replace(/\D/g, "");
+    const waUrl = `https://wa.me/${cleanPhone}`;
+
+    printWindow.onload = () => {
+      setTimeout(() => {
+        printWindow.focus();
+        printWindow.print();
+        // Open WhatsApp after a short delay to let print dialog open first
+        setTimeout(() => {
+          window.open(waUrl, "_blank", "noopener,noreferrer");
+          toast.success("Save the invoice as PDF, then send it via WhatsApp.");
+        }, 800);
+      }, 500);
+    };
   }
 
   const taxableAmount = sale.subtotal - sale.discountTotal;
@@ -111,18 +165,8 @@ export function PrintInvoice({ sale, settings, onClose }: PrintInvoiceProps) {
     .join("")
     .toUpperCase();
 
-  return (
+  const modal = (
     <>
-      {/* Print styles */}
-      <style>{`
-        @media print {
-          body > * { display: none !important; }
-          #print-invoice-modal { display: flex !important; position: fixed; inset: 0; background: white; z-index: 99999; overflow: auto; }
-          .no-print { display: none !important; }
-          .print-page { box-shadow: none !important; border: none !important; margin: 0; padding: 16px; width: 100%; }
-        }
-      `}</style>
-
       {/* Modal Overlay */}
       <div
         id="print-invoice-modal"
@@ -138,19 +182,9 @@ export function PrintInvoice({ sale, settings, onClose }: PrintInvoiceProps) {
               <button
                 type="button"
                 onClick={handleWhatsApp}
-                disabled={isGenerating}
-                className="flex items-center gap-1.5 px-4 py-2 bg-green-500 text-white rounded-md text-sm font-medium hover:bg-green-600 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                className="flex items-center gap-1.5 px-4 py-2 bg-green-500 text-white rounded-md text-sm font-medium hover:bg-green-600 transition-colors"
               >
-                {isGenerating ? (
-                  <>
-                    <Loader2 size={15} className="animate-spin" />
-                    Generating PDF...
-                  </>
-                ) : (
-                  <>
-                    <MessageCircle size={15} /> Share on WhatsApp
-                  </>
-                )}
+                <MessageCircle size={15} /> Share on WhatsApp
               </button>
               <button
                 type="button"
@@ -426,4 +460,6 @@ export function PrintInvoice({ sale, settings, onClose }: PrintInvoiceProps) {
       </div>
     </>
   );
+
+  return createPortal(modal, document.body);
 }
