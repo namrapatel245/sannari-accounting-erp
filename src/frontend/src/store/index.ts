@@ -118,6 +118,8 @@ interface StoreState {
 
   // Transactions
   addTransaction: (t: Omit<Transaction, "id">) => void;
+  updateTransaction: (id: string, t: Partial<Transaction>) => void;
+  deleteTransaction: (id: string) => void;
   deleteTransactionsByRef: (refNumber: string) => void;
 
   // Expenses
@@ -143,6 +145,9 @@ interface StoreState {
 
   // Import
   importData: (data: Partial<StoreData>, mode: "replace" | "merge") => void;
+
+  // Clear All Data
+  clearAllData: () => void;
 
   // Computed helpers
   getCashBalance: () => number;
@@ -571,6 +576,20 @@ export const useStore = create<StoreState>((set, get) => ({
     set({ transactions: next });
   },
 
+  updateTransaction: (id, t) => {
+    const next = get().transactions.map((x) =>
+      x.id === id ? { ...x, ...t } : x,
+    );
+    save(KEYS.transactions, next);
+    set({ transactions: next });
+  },
+
+  deleteTransaction: (id) => {
+    const next = get().transactions.filter((x) => x.id !== id);
+    save(KEYS.transactions, next);
+    set({ transactions: next });
+  },
+
   deleteTransactionsByRef: (refNumber) => {
     const next = get().transactions.filter(
       (t) => t.referenceNumber !== refNumber,
@@ -872,6 +891,27 @@ export const useStore = create<StoreState>((set, get) => ({
         set({ paymentOuts: next });
       }
     }
+  },
+
+  // Clear All Data
+  clearAllData: () => {
+    const emptyState = {
+      products: [],
+      sales: [],
+      purchases: [],
+      suppliers: [],
+      customers: [],
+      transactions: [],
+      expenses: [],
+      bankAccounts: [],
+      stockAdjustments: [],
+      paymentIns: [],
+      paymentOuts: [],
+    };
+    for (const [k, v] of Object.entries(emptyState)) {
+      save(KEYS[k as keyof typeof KEYS], v);
+    }
+    set(emptyState);
   },
 
   // Computed helpers

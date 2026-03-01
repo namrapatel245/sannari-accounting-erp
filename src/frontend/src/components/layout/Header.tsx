@@ -1,4 +1,3 @@
-import { format } from "date-fns";
 import {
   Menu,
   Package,
@@ -43,22 +42,14 @@ interface HeaderProps {
 }
 
 export function Header({ currentRoute, navigate }: HeaderProps) {
-  const {
-    settings,
-    products,
-    sales,
-    purchases,
-    suppliers,
-    customers,
-    toggleSidebar,
-  } = useStore();
+  const { products, sales, purchases, suppliers, customers, toggleSidebar } =
+    useStore();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [showResults, setShowResults] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
 
   const pageTitle = pageTitles[currentRoute] || "SANNARI ERP";
-  const today = format(new Date(), "EEE, dd MMM yyyy");
 
   const doSearch = useCallback(
     (q: string) => {
@@ -261,18 +252,8 @@ export function Header({ currentRoute, navigate }: HeaderProps) {
         )}
       </div>
 
-      {/* Right side */}
-      <div className="ml-auto flex items-center gap-4">
-        <div className="hidden lg:flex flex-col items-end">
-          <span className="text-sm font-semibold text-slate-800">
-            {settings.businessName}
-          </span>
-          <span className="text-xs text-slate-500">{today}</span>
-        </div>
-        <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
-          {settings.businessName.charAt(0)}
-        </div>
-      </div>
+      {/* Right side - intentionally empty */}
+      <div className="ml-auto" />
     </header>
   );
 }

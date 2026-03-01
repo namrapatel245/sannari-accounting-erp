@@ -1,16 +1,26 @@
-import { Check, Edit2, ImagePlus, Plus, Save, Trash2, X } from "lucide-react";
+import {
+  AlertTriangle,
+  Check,
+  Edit2,
+  ImagePlus,
+  Plus,
+  Save,
+  Trash2,
+  X,
+} from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useStore } from "../../store";
 import type { Customer, Supplier } from "../../types";
-import { generateId } from "../../utils/helpers";
+import { downloadJSON } from "../../utils/helpers";
 
 type SettingsTab =
   | "business"
   | "suppliers"
   | "customers"
   | "categories"
-  | "invoice";
+  | "invoice"
+  | "data";
 
 interface PartyForm {
   name: string;
@@ -283,8 +293,17 @@ export function Settings() {
     addCustomer,
     updateCustomer,
     deleteCustomer,
+    clearAllData,
+    products,
+    sales,
+    purchases,
+    transactions,
+    expenses,
+    bankAccounts,
   } = useStore();
   const [activeTab, setActiveTab] = useState<SettingsTab>("business");
+  const [confirmClear, setConfirmClear] = useState(false);
+  const [clearConfirmText, setClearConfirmText] = useState("");
 
   // Business form
   const [bizForm, setBizForm] = useState({ ...settings });
@@ -341,12 +360,43 @@ export function Settings() {
     toast.success("Category removed");
   }
 
+  function handleExportBackup() {
+    const today = new Date().toISOString().slice(0, 10);
+    downloadJSON(
+      {
+        products,
+        sales,
+        purchases,
+        suppliers,
+        customers,
+        transactions,
+        expenses,
+        bankAccounts,
+        settings,
+      },
+      `sannari_backup_${today}.json`,
+    );
+    toast.success("Backup exported successfully");
+  }
+
+  function handleClearAll() {
+    if (clearConfirmText !== "CLEAR ALL") {
+      toast.error('Type "CLEAR ALL" to confirm');
+      return;
+    }
+    clearAllData();
+    setConfirmClear(false);
+    setClearConfirmText("");
+    toast.success("All data cleared");
+  }
+
   const tabs: { key: SettingsTab; label: string }[] = [
     { key: "business", label: "Business Profile" },
     { key: "suppliers", label: "Suppliers" },
     { key: "customers", label: "Customers" },
     { key: "categories", label: "Categories" },
     { key: "invoice", label: "Invoice Settings" },
+    { key: "data", label: "Data" },
   ];
 
   return (
@@ -651,6 +701,112 @@ export function Settings() {
                   <Plus size={13} /> Add
                 </button>
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* Data Management */}
+        {activeTab === "data" && (
+          <div className="max-w-2xl space-y-6">
+            <h3 className="text-base font-semibold text-slate-800">
+              Data Management
+            </h3>
+
+            {/* Backup */}
+            <div className="border border-[#e2e8f0] rounded-lg p-4">
+              <h4 className="text-sm font-semibold text-slate-700 mb-1">
+                Backup Data
+              </h4>
+              <p className="text-xs text-slate-500 mb-3">
+                Download a full backup of all your business data as a JSON file.
+                Keep this file safe to restore your data later.
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+                {[
+                  { label: "Products", count: products.length },
+                  { label: "Sales", count: sales.length },
+                  { label: "Purchases", count: purchases.length },
+                  { label: "Transactions", count: transactions.length },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    className="bg-slate-50 rounded-md p-2 text-center"
+                  >
+                    <div className="text-lg font-bold text-blue-700">
+                      {item.count}
+                    </div>
+                    <div className="text-xs text-slate-500">{item.label}</div>
+                  </div>
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={handleExportBackup}
+                className="flex items-center gap-1.5 px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700"
+              >
+                <Save size={14} /> Download Backup
+              </button>
+            </div>
+
+            {/* Clear All Data */}
+            <div className="border border-red-200 rounded-lg p-4 bg-red-50/30">
+              <div className="flex items-center gap-2 mb-1">
+                <AlertTriangle size={16} className="text-red-500" />
+                <h4 className="text-sm font-semibold text-red-700">
+                  Clear All Data
+                </h4>
+              </div>
+              <p className="text-xs text-slate-500 mb-3">
+                Permanently delete all sales, purchases, products, customers,
+                suppliers, transactions, and expenses. This action cannot be
+                undone. We strongly recommend taking a backup first.
+              </p>
+
+              {!confirmClear ? (
+                <button
+                  type="button"
+                  onClick={() => setConfirmClear(true)}
+                  className="flex items-center gap-1.5 px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-md hover:bg-red-700"
+                >
+                  <Trash2 size={14} /> Clear All Data
+                </button>
+              ) : (
+                <div className="space-y-3">
+                  <p className="text-sm font-medium text-red-700">
+                    Type{" "}
+                    <span className="font-mono bg-red-100 px-1.5 py-0.5 rounded">
+                      CLEAR ALL
+                    </span>{" "}
+                    to confirm:
+                  </p>
+                  <input
+                    value={clearConfirmText}
+                    onChange={(e) => setClearConfirmText(e.target.value)}
+                    placeholder="Type CLEAR ALL"
+                    className="w-full px-3 py-2 text-sm border border-red-300 rounded-md focus:outline-none focus:border-red-500 bg-white"
+                  />
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setConfirmClear(false);
+                        setClearConfirmText("");
+                      }}
+                      className="px-4 py-2 text-sm border border-[#e2e8f0] text-slate-600 rounded-md hover:bg-white"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleClearAll}
+                      disabled={clearConfirmText !== "CLEAR ALL"}
+                      className="flex items-center gap-1.5 px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-md hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <Trash2 size={14} /> Confirm Clear All
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}

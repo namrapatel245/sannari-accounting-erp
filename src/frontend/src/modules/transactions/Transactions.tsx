@@ -1,14 +1,32 @@
 import { format, parseISO } from "date-fns";
-import { ChevronLeft, ChevronRight, Plus, Save, Search, X } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Edit2,
+  Plus,
+  Save,
+  Search,
+  Trash2,
+  X,
+} from "lucide-react";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { useStore } from "../../store";
+import type { Transaction } from "../../types";
 import { formatCurrency, getTodayStr } from "../../utils/helpers";
 
 type FilterType = "All" | "Sale" | "Purchase" | "Expense";
 
+const PAYMENT_METHODS = ["Cash", "Bank", "UPI", "Credit"];
+
 export function Transactions() {
-  const { transactions, settings, addExpense } = useStore();
+  const {
+    transactions,
+    settings,
+    addExpense,
+    updateTransaction,
+    deleteTransaction,
+  } = useStore();
 
   // Expense form state
   const [showExpenseForm, setShowExpenseForm] = useState(false);
@@ -19,6 +37,11 @@ export function Transactions() {
   const [expPayment, setExpPayment] = useState("Cash");
   const [expNotes, setExpNotes] = useState("");
   const [expErrors, setExpErrors] = useState<Record<string, string>>({});
+
+  // Edit transaction state
+  const [editingTxn, setEditingTxn] = useState<Transaction | null>(null);
+  const [editForm, setEditForm] = useState<Partial<Transaction>>({});
+  const [editErrors, setEditErrors] = useState<Record<string, string>>({});
 
   // Filters
   const [search, setSearch] = useState("");
@@ -57,6 +80,46 @@ export function Transactions() {
     setExpNotes("");
     setExpErrors({});
     setShowExpenseForm(false);
+  }
+
+  function openEditTxn(t: Transaction) {
+    setEditingTxn(t);
+    setEditForm({
+      date: t.date,
+      partyName: t.partyName,
+      amount: t.amount,
+      paymentMethod: t.paymentMethod,
+      notes: t.notes,
+    });
+    setEditErrors({});
+  }
+
+  function validateEdit(): boolean {
+    const errs: Record<string, string> = {};
+    if (!editForm.date) errs.date = "Date required";
+    if (!editForm.amount || editForm.amount <= 0)
+      errs.amount = "Amount must be > 0";
+    setEditErrors(errs);
+    return Object.keys(errs).length === 0;
+  }
+
+  function handleSaveEdit() {
+    if (!editingTxn || !validateEdit()) return;
+    updateTransaction(editingTxn.id, editForm);
+    toast.success("Transaction updated");
+    setEditingTxn(null);
+    setEditForm({});
+  }
+
+  function handleDeleteTxn(t: Transaction) {
+    if (
+      !confirm(
+        `Delete transaction "${t.referenceNumber}"? This cannot be undone.`,
+      )
+    )
+      return;
+    deleteTransaction(t.id);
+    toast.success("Transaction deleted");
   }
 
   const filteredTxns = useMemo(() => {
@@ -100,6 +163,168 @@ export function Transactions() {
 
   return (
     <div className="space-y-4">
+      {/* Edit Transaction Modal */}
+      {editingTxn && (
+        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl shadow-2xl w-full max-w-lg">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-[#e2e8f0]">
+              <h3 className="text-base font-semibold text-slate-800">
+                Edit Transaction
+              </h3>
+              <button
+                type="button"
+                onClick={() => setEditingTxn(null)}
+                className="text-slate-400 hover:text-slate-600"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <div className="p-5 space-y-3">
+              {/* Reference (read-only) */}
+              <div>
+                <p className="block text-xs font-medium text-slate-500 mb-1">
+                  Reference No.
+                </p>
+                <div className="px-3 py-2 text-sm bg-slate-50 border border-[#e2e8f0] rounded-md text-slate-600 font-mono">
+                  {editingTxn.referenceNumber}
+                </div>
+              </div>
+              {/* Type (read-only) */}
+              <div>
+                <p className="block text-xs font-medium text-slate-500 mb-1">
+                  Type
+                </p>
+                <div className="px-3 py-2 text-sm bg-slate-50 border border-[#e2e8f0] rounded-md text-slate-600">
+                  {editingTxn.type}
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label
+                    htmlFor="edit-txn-date"
+                    className="block text-xs font-medium text-slate-600 mb-1"
+                  >
+                    Date
+                  </label>
+                  <input
+                    id="edit-txn-date"
+                    type="date"
+                    value={editForm.date ?? ""}
+                    onChange={(e) =>
+                      setEditForm((f) => ({ ...f, date: e.target.value }))
+                    }
+                    className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  />
+                  {editErrors.date && (
+                    <p className="text-red-500 text-xs mt-0.5">
+                      {editErrors.date}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <label
+                    htmlFor="edit-txn-amount"
+                    className="block text-xs font-medium text-slate-600 mb-1"
+                  >
+                    Amount (₹)
+                  </label>
+                  <input
+                    id="edit-txn-amount"
+                    type="number"
+                    min="0"
+                    value={editForm.amount ?? 0}
+                    onChange={(e) =>
+                      setEditForm((f) => ({
+                        ...f,
+                        amount: Number(e.target.value),
+                      }))
+                    }
+                    className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  />
+                  {editErrors.amount && (
+                    <p className="text-red-500 text-xs mt-0.5">
+                      {editErrors.amount}
+                    </p>
+                  )}
+                </div>
+              </div>
+              <div>
+                <label
+                  htmlFor="edit-txn-party"
+                  className="block text-xs font-medium text-slate-600 mb-1"
+                >
+                  Party Name
+                </label>
+                <input
+                  id="edit-txn-party"
+                  value={editForm.partyName ?? ""}
+                  onChange={(e) =>
+                    setEditForm((f) => ({ ...f, partyName: e.target.value }))
+                  }
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="edit-txn-payment"
+                  className="block text-xs font-medium text-slate-600 mb-1"
+                >
+                  Payment Method
+                </label>
+                <select
+                  id="edit-txn-payment"
+                  value={editForm.paymentMethod ?? "Cash"}
+                  onChange={(e) =>
+                    setEditForm((f) => ({
+                      ...f,
+                      paymentMethod: e.target.value,
+                    }))
+                  }
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                >
+                  {PAYMENT_METHODS.map((m) => (
+                    <option key={m}>{m}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label
+                  htmlFor="edit-txn-notes"
+                  className="block text-xs font-medium text-slate-600 mb-1"
+                >
+                  Notes
+                </label>
+                <input
+                  id="edit-txn-notes"
+                  value={editForm.notes ?? ""}
+                  onChange={(e) =>
+                    setEditForm((f) => ({ ...f, notes: e.target.value }))
+                  }
+                  placeholder="Optional notes"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                />
+              </div>
+            </div>
+            <div className="flex justify-end gap-2 px-5 py-4 border-t border-[#e2e8f0]">
+              <button
+                type="button"
+                onClick={() => setEditingTxn(null)}
+                className="px-4 py-2 text-sm border border-[#e2e8f0] text-slate-600 rounded-md hover:bg-slate-50"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleSaveEdit}
+                className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700"
+              >
+                <Save size={14} /> Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Summary */}
       <div className="grid grid-cols-3 gap-3">
         <div className="bg-white rounded-lg border border-[#e2e8f0] p-3">
@@ -368,12 +593,15 @@ export function Transactions() {
                 <th className="text-left px-4 py-2.5 text-xs font-semibold text-slate-600 uppercase tracking-wide">
                   Notes
                 </th>
+                <th className="text-center px-4 py-2.5 text-xs font-semibold text-slate-600 uppercase tracking-wide">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
               {paginated.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="text-center py-8 text-slate-400">
+                  <td colSpan={8} className="text-center py-8 text-slate-400">
                     No transactions found
                   </td>
                 </tr>
@@ -439,6 +667,26 @@ export function Transactions() {
                     </td>
                     <td className="px-4 py-2.5 text-slate-500 text-xs max-w-[150px] truncate">
                       {t.notes}
+                    </td>
+                    <td className="px-4 py-2.5">
+                      <div className="flex items-center justify-center gap-1.5">
+                        <button
+                          type="button"
+                          onClick={() => openEditTxn(t)}
+                          title="Edit transaction"
+                          className="p-1 text-blue-500 hover:text-blue-700 hover:bg-blue-50 rounded transition-colors"
+                        >
+                          <Edit2 size={13} />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleDeleteTxn(t)}
+                          title="Delete transaction"
+                          className="p-1 text-red-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors"
+                        >
+                          <Trash2 size={13} />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))
