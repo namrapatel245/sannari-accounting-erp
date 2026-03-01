@@ -251,7 +251,7 @@ export function ImportExport() {
       {/* Import Section */}
       <div className="bg-white rounded-lg border border-[#e2e8f0] p-5">
         <div className="flex items-center gap-2 mb-4">
-          <Upload className="text-blue-600" size={20} />
+          <Upload className="text-green-600" size={20} />
           <h2 className="text-base font-semibold text-slate-800">
             Import Data
           </h2>
@@ -265,7 +265,7 @@ export function ImportExport() {
           <button
             type="button"
             onClick={() => fileRef.current?.click()}
-            className="w-full border-2 border-dashed border-[#e2e8f0] rounded-lg p-8 text-center cursor-pointer hover:border-blue-400 hover:bg-blue-50/30 transition-colors"
+            className="w-full border-2 border-dashed border-[#e2e8f0] rounded-lg p-8 text-center cursor-pointer hover:border-green-400 hover:bg-green-50/30 transition-colors"
           >
             <FileJson size={36} className="mx-auto text-slate-400 mb-2" />
             <p className="text-sm font-medium text-slate-700">
@@ -275,7 +275,7 @@ export function ImportExport() {
               Only .json files exported from SANNARI are supported
             </p>
             {importFile && (
-              <div className="mt-2 px-3 py-1.5 bg-blue-100 text-blue-800 rounded text-sm inline-block">
+              <div className="mt-2 px-3 py-1.5 bg-green-100 text-green-800 rounded text-sm inline-block">
                 📄 {importFile.name}
               </div>
             )}
@@ -301,24 +301,24 @@ export function ImportExport() {
 
           {/* Preview */}
           {importPreview && (
-            <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
               <div className="flex items-center gap-1.5 mb-2">
-                <Eye size={15} className="text-blue-700" />
-                <h4 className="text-sm font-semibold text-blue-800">
+                <Eye size={15} className="text-green-700" />
+                <h4 className="text-sm font-semibold text-green-800">
                   Import Preview
                 </h4>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {importPreview.products !== undefined && (
-                  <div className="bg-white px-2 py-1.5 rounded text-center border border-blue-100">
-                    <div className="text-lg font-bold text-blue-700">
+                  <div className="bg-white px-2 py-1.5 rounded text-center border border-green-100">
+                    <div className="text-lg font-bold text-green-700">
                       {importPreview.products}
                     </div>
                     <div className="text-xs text-slate-500">Products</div>
                   </div>
                 )}
                 {importPreview.sales !== undefined && (
-                  <div className="bg-white px-2 py-1.5 rounded text-center border border-blue-100">
+                  <div className="bg-white px-2 py-1.5 rounded text-center border border-green-100">
                     <div className="text-lg font-bold text-green-700">
                       {importPreview.sales}
                     </div>
@@ -326,7 +326,7 @@ export function ImportExport() {
                   </div>
                 )}
                 {importPreview.purchases !== undefined && (
-                  <div className="bg-white px-2 py-1.5 rounded text-center border border-blue-100">
+                  <div className="bg-white px-2 py-1.5 rounded text-center border border-green-100">
                     <div className="text-lg font-bold text-orange-600">
                       {importPreview.purchases}
                     </div>
@@ -334,7 +334,7 @@ export function ImportExport() {
                   </div>
                 )}
                 {importPreview.suppliers !== undefined && (
-                  <div className="bg-white px-2 py-1.5 rounded text-center border border-blue-100">
+                  <div className="bg-white px-2 py-1.5 rounded text-center border border-green-100">
                     <div className="text-lg font-bold text-slate-700">
                       {importPreview.suppliers}
                     </div>
@@ -342,7 +342,7 @@ export function ImportExport() {
                   </div>
                 )}
                 {importPreview.customers !== undefined && (
-                  <div className="bg-white px-2 py-1.5 rounded text-center border border-blue-100">
+                  <div className="bg-white px-2 py-1.5 rounded text-center border border-green-100">
                     <div className="text-lg font-bold text-slate-700">
                       {importPreview.customers}
                     </div>
@@ -350,7 +350,7 @@ export function ImportExport() {
                   </div>
                 )}
                 {importPreview.transactions !== undefined && (
-                  <div className="bg-white px-2 py-1.5 rounded text-center border border-blue-100">
+                  <div className="bg-white px-2 py-1.5 rounded text-center border border-green-100">
                     <div className="text-lg font-bold text-slate-700">
                       {importPreview.transactions}
                     </div>
@@ -358,7 +358,7 @@ export function ImportExport() {
                   </div>
                 )}
                 {importPreview.expenses !== undefined && (
-                  <div className="bg-white px-2 py-1.5 rounded text-center border border-blue-100">
+                  <div className="bg-white px-2 py-1.5 rounded text-center border border-green-100">
                     <div className="text-lg font-bold text-red-600">
                       {importPreview.expenses}
                     </div>
@@ -366,7 +366,7 @@ export function ImportExport() {
                   </div>
                 )}
                 {importPreview.bankAccounts !== undefined && (
-                  <div className="bg-white px-2 py-1.5 rounded text-center border border-blue-100">
+                  <div className="bg-white px-2 py-1.5 rounded text-center border border-green-100">
                     <div className="text-lg font-bold text-teal-600">
                       {importPreview.bankAccounts}
                     </div>
@@ -374,7 +374,7 @@ export function ImportExport() {
                   </div>
                 )}
                 {importPreview.settings && (
-                  <div className="bg-white px-2 py-1.5 rounded text-center border border-blue-100">
+                  <div className="bg-white px-2 py-1.5 rounded text-center border border-green-100">
                     <div className="text-lg font-bold text-purple-600">✓</div>
                     <div className="text-xs text-slate-500">Settings</div>
                   </div>
@@ -394,7 +394,7 @@ export function ImportExport() {
                       value="merge"
                       checked={importMode === "merge"}
                       onChange={() => setImportMode("merge")}
-                      className="text-blue-600"
+                      className="text-green-600"
                     />
                     <span className="text-sm text-slate-700">
                       Merge{" "}
@@ -431,7 +431,7 @@ export function ImportExport() {
               <button
                 type="button"
                 onClick={handleImport}
-                className="mt-3 flex items-center gap-1.5 px-5 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700"
+                className="mt-3 flex items-center gap-1.5 px-5 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700"
               >
                 <Upload size={14} /> Confirm Import
               </button>
@@ -460,7 +460,7 @@ export function ImportExport() {
             {
               label: "Products",
               count: products.length,
-              color: "text-blue-700",
+              color: "text-green-700",
             },
             { label: "Sales", count: sales.length, color: "text-green-700" },
             {

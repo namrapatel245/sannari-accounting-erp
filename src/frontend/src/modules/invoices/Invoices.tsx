@@ -56,7 +56,7 @@ export function Invoices({ navigate }: InvoicesProps) {
       {/* Page Header */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-blue-600 text-white">
+          <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-green-600 text-white">
             <FileText size={18} />
           </div>
           <div>
@@ -69,7 +69,7 @@ export function Invoices({ navigate }: InvoicesProps) {
         <button
           type="button"
           onClick={() => navigate("/sales")}
-          className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors"
+          className="flex items-center gap-1.5 px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 transition-colors"
         >
           + New Invoice
         </button>
@@ -86,7 +86,7 @@ export function Invoices({ navigate }: InvoicesProps) {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by invoice no. or customer..."
-            className="w-full pl-9 pr-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+            className="w-full pl-9 pr-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
           />
         </div>
       </div>
@@ -186,7 +186,7 @@ export function Invoices({ navigate }: InvoicesProps) {
                             type="button"
                             onClick={() => setSelectedSale(sale)}
                             title="View Invoice"
-                            className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-md transition-colors"
+                            className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-green-600 bg-green-50 hover:bg-green-100 border border-green-200 rounded-md transition-colors"
                           >
                             <Eye size={13} /> View
                           </button>

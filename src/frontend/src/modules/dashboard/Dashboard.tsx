@@ -35,7 +35,7 @@ import {
 } from "../../utils/helpers";
 
 const COLORS = [
-  "#1e40af",
+  "#166534",
   "#16a34a",
   "#ea580c",
   "#7c3aed",
@@ -48,7 +48,7 @@ function KPICard({
   value,
   change,
   icon: Icon,
-  color = "blue",
+  color = "green",
 }: {
   title: string;
   value: string;
@@ -57,7 +57,7 @@ function KPICard({
   color?: string;
 }) {
   const colorMap: Record<string, string> = {
-    blue: "bg-blue-50 text-blue-600",
+    blue: "bg-green-50 text-green-600",
     green: "bg-green-50 text-green-600",
     orange: "bg-orange-50 text-orange-600",
     red: "bg-red-50 text-red-600",
@@ -264,7 +264,7 @@ export function Dashboard() {
           title="Total Sales"
           value={formatCurrency(kpis.totalSales)}
           icon={ShoppingCart}
-          color="blue"
+          color="green"
         />
         <KPICard
           title="Total Purchases"
@@ -301,7 +301,7 @@ export function Dashboard() {
           value={formatCurrency(kpis.monthlySales)}
           change={kpis.salesChange}
           icon={BarChart3}
-          color="blue"
+          color="green"
         />
         <KPICard
           title="Monthly Purchases"
@@ -328,7 +328,7 @@ export function Dashboard() {
               />
               <Tooltip formatter={(v: number) => formatCurrency(v)} />
               <Legend wrapperStyle={{ fontSize: 12 }} />
-              <Bar dataKey="Sales" fill="#1e40af" radius={[3, 3, 0, 0]} />
+              <Bar dataKey="Sales" fill="#166534" radius={[3, 3, 0, 0]} />
               <Bar dataKey="Purchases" fill="#ea580c" radius={[3, 3, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
@@ -351,7 +351,7 @@ export function Dashboard() {
               <Line
                 type="monotone"
                 dataKey="Gross Profit"
-                stroke="#1e40af"
+                stroke="#166534"
                 strokeWidth={2}
                 dot={{ r: 3 }}
               />
@@ -391,7 +391,7 @@ export function Dashboard() {
                 tick={{ fontSize: 10 }}
               />
               <Tooltip formatter={(v: number) => formatCurrency(v)} />
-              <Bar dataKey="revenue" fill="#1e40af" radius={[0, 3, 3, 0]} />
+              <Bar dataKey="revenue" fill="#166534" radius={[0, 3, 3, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -471,7 +471,7 @@ export function Dashboard() {
             <tbody>
               {recentSales.map((s) => (
                 <tr key={s.id} className="border-t border-slate-100">
-                  <td className="py-1.5 font-mono text-blue-700">
+                  <td className="py-1.5 font-mono text-green-700">
                     {s.billNumber}
                   </td>
                   <td className="py-1.5 text-slate-700 truncate max-w-[80px]">

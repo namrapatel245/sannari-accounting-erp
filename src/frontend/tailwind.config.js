@@ -21,7 +21,7 @@ export default {
       },
       colors: {
         "erp-sidebar": "#0f172a",
-        "erp-primary": "#1e40af",
+        "erp-primary": "#16a34a",
         "erp-success": "#16a34a",
         "erp-danger": "#dc2626",
         "erp-warning": "#ea580c",

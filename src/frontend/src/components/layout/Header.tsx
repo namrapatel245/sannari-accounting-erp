@@ -197,7 +197,7 @@ export function Header({ currentRoute, navigate }: HeaderProps) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={() => searchQuery.length >= 2 && setShowResults(true)}
-            className="w-full pl-9 pr-8 py-2 text-sm bg-[#f8fafc] border border-[#e2e8f0] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-400 transition-colors"
+            className="w-full pl-9 pr-8 py-2 text-sm bg-[#f8fafc] border border-[#e2e8f0] rounded-md focus:outline-none focus:ring-2 focus:ring-green-500/30 focus:border-green-400 transition-colors"
           />
           {searchQuery && (
             <button
@@ -231,7 +231,7 @@ export function Header({ currentRoute, navigate }: HeaderProps) {
                       type="button"
                       key={result.id}
                       onClick={() => handleResultClick(result)}
-                      className="w-full flex items-center gap-3 px-4 py-2 text-left hover:bg-blue-50 transition-colors"
+                      className="w-full flex items-center gap-3 px-4 py-2 text-left hover:bg-green-50 transition-colors"
                     >
                       <div>
                         <div className="text-sm font-medium text-slate-800">

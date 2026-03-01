@@ -296,21 +296,21 @@ export function Purchase() {
               setActiveTab("list");
               resetForm();
             }}
-            className={`px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors ${activeTab === "list" ? "border-blue-600 text-blue-700" : "border-transparent text-slate-500 hover:text-slate-700"}`}
+            className={`px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors ${activeTab === "list" ? "border-green-600 text-green-700" : "border-transparent text-slate-500 hover:text-slate-700"}`}
           >
             Purchase List
           </button>
           <button
             type="button"
             onClick={openNewForm}
-            className={`px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors ${activeTab === "form" ? "border-blue-600 text-blue-700" : "border-transparent text-slate-500 hover:text-slate-700"}`}
+            className={`px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors ${activeTab === "form" ? "border-green-600 text-green-700" : "border-transparent text-slate-500 hover:text-slate-700"}`}
           >
             {editingPurchase ? "Edit Purchase" : "New Purchase"}
           </button>
           <button
             type="button"
             onClick={openNewForm}
-            className="ml-auto flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white rounded text-sm font-medium hover:bg-blue-700 transition-colors my-2"
+            className="ml-auto flex items-center gap-1.5 px-3 py-1.5 bg-green-600 text-white rounded text-sm font-medium hover:bg-green-700 transition-colors my-2"
           >
             <Plus size={15} /> New Purchase
           </button>
@@ -333,7 +333,7 @@ export function Purchase() {
                   id="pur-billno"
                   value={billNumber}
                   onChange={(e) => setBillNumber(e.target.value)}
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400"
                 />
                 {errors.billNumber && (
                   <p className="text-red-500 text-xs mt-0.5">
@@ -353,7 +353,7 @@ export function Purchase() {
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400"
                 />
               </div>
               <div>
@@ -373,7 +373,7 @@ export function Purchase() {
                       setSupplierName("");
                     } else handleSupplierChange(val);
                   }}
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400"
                 >
                   <option value="">Select supplier</option>
                   {suppliers.map((s) => (
@@ -414,7 +414,7 @@ export function Purchase() {
                     if (e.target.value === "Credit") setPaymentStatus("Unpaid");
                     else setPaymentStatus("Paid");
                   }}
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-400"
                 >
                   <option>Cash</option>
                   <option>Bank</option>
@@ -467,7 +467,7 @@ export function Purchase() {
                 <button
                   type="button"
                   onClick={() => setItems((p) => [...p, emptyItem()])}
-                  className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 font-medium"
+                  className="flex items-center gap-1 text-xs text-green-600 hover:text-green-800 font-medium"
                 >
                   <Plus size={13} /> Add Item
                 </button>
@@ -519,7 +519,7 @@ export function Purchase() {
                               onChange={(e) =>
                                 handleItemProduct(idx, e.target.value)
                               }
-                              className="w-full px-1.5 py-1 text-xs border border-[#e2e8f0] rounded focus:outline-none focus:border-blue-400"
+                              className="w-full px-1.5 py-1 text-xs border border-[#e2e8f0] rounded focus:outline-none focus:border-green-400"
                             >
                               <option value="">Select product</option>
                               {products.map((p) => (
@@ -535,7 +535,7 @@ export function Purchase() {
                               onChange={(e) =>
                                 handleItemField(idx, "hsnCode", e.target.value)
                               }
-                              className="w-full px-1.5 py-1 text-xs border border-[#e2e8f0] rounded focus:outline-none focus:border-blue-400"
+                              className="w-full px-1.5 py-1 text-xs border border-[#e2e8f0] rounded focus:outline-none focus:border-green-400"
                               placeholder="HSN"
                             />
                           </td>
@@ -551,7 +551,7 @@ export function Purchase() {
                                   Number(e.target.value),
                                 )
                               }
-                              className="w-full px-1.5 py-1 text-xs border border-[#e2e8f0] rounded text-right focus:outline-none focus:border-blue-400"
+                              className="w-full px-1.5 py-1 text-xs border border-[#e2e8f0] rounded text-right focus:outline-none focus:border-green-400"
                             />
                           </td>
                           <td className="px-2 py-1.5">
@@ -566,7 +566,7 @@ export function Purchase() {
                                   Number(e.target.value),
                                 )
                               }
-                              className="w-full px-1.5 py-1 text-xs border border-[#e2e8f0] rounded text-right focus:outline-none focus:border-blue-400"
+                              className="w-full px-1.5 py-1 text-xs border border-[#e2e8f0] rounded text-right focus:outline-none focus:border-green-400"
                             />
                           </td>
                           <td className="px-2 py-1.5">
@@ -579,7 +579,7 @@ export function Purchase() {
                                   Number(e.target.value),
                                 )
                               }
-                              className="w-full px-1.5 py-1 text-xs border border-[#e2e8f0] rounded focus:outline-none focus:border-blue-400"
+                              className="w-full px-1.5 py-1 text-xs border border-[#e2e8f0] rounded focus:outline-none focus:border-green-400"
                             >
                               {GST_RATES.map((r) => (
                                 <option key={r} value={r}>
@@ -650,7 +650,7 @@ export function Purchase() {
                         </td>
                         <td
                           colSpan={2}
-                          className="px-2 py-2 text-right text-base font-bold text-blue-700"
+                          className="px-2 py-2 text-right text-base font-bold text-green-700"
                         >
                           {formatCurrency(totals.totalAmount)}
                         </td>
@@ -676,7 +676,7 @@ export function Purchase() {
               <button
                 type="button"
                 onClick={handleSave}
-                className="flex items-center gap-1.5 px-5 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors"
+                className="flex items-center gap-1.5 px-5 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 transition-colors"
               >
                 <Save size={15} />{" "}
                 {editingPurchase ? "Update Purchase" : "Save Purchase"}
@@ -708,7 +708,7 @@ export function Purchase() {
                   setFilterFrom(e.target.value);
                   setPage(1);
                 }}
-                className="px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                className="px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
               />
               <input
                 type="date"
@@ -717,7 +717,7 @@ export function Purchase() {
                   setFilterTo(e.target.value);
                   setPage(1);
                 }}
-                className="px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                className="px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
               />
               <select
                 value={filterSupplier}
@@ -725,7 +725,7 @@ export function Purchase() {
                   setFilterSupplier(e.target.value);
                   setPage(1);
                 }}
-                className="px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                className="px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
               >
                 <option value="">All Suppliers</option>
                 {suppliers.map((s) => (
@@ -740,7 +740,7 @@ export function Purchase() {
                   setFilterPayment(e.target.value);
                   setPage(1);
                 }}
-                className="px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                className="px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
               >
                 <option value="">All Payments</option>
                 <option>Cash</option>
@@ -792,7 +792,7 @@ export function Purchase() {
                         </td>
                         <td>
                           <span
-                            className={`px-2 py-0.5 rounded text-xs font-medium ${p.paymentMethod === "Cash" ? "bg-green-100 text-green-700" : p.paymentMethod === "Bank" ? "bg-blue-100 text-blue-700" : p.paymentMethod === "UPI" ? "bg-purple-100 text-purple-700" : "bg-orange-100 text-orange-700"}`}
+                            className={`px-2 py-0.5 rounded text-xs font-medium ${p.paymentMethod === "Cash" ? "bg-green-100 text-green-700" : p.paymentMethod === "Bank" ? "bg-green-100 text-green-700" : p.paymentMethod === "UPI" ? "bg-purple-100 text-purple-700" : "bg-orange-100 text-orange-700"}`}
                           >
                             {p.paymentMethod}
                           </span>
@@ -803,7 +803,7 @@ export function Purchase() {
                             <button
                               type="button"
                               onClick={() => openEditForm(p)}
-                              className="p-1 text-blue-500 hover:text-blue-700 hover:bg-blue-50 rounded"
+                              className="p-1 text-green-500 hover:text-green-700 hover:bg-green-50 rounded"
                             >
                               <Edit2 size={14} />
                             </button>

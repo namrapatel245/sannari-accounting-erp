@@ -124,16 +124,16 @@ function CustomerManager() {
         <button
           type="button"
           onClick={openAdd}
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white rounded text-sm font-medium hover:bg-blue-700"
+          className="flex items-center gap-1.5 px-3 py-1.5 bg-green-600 text-white rounded text-sm font-medium hover:bg-green-700"
         >
           <Plus size={14} /> Add Customer
         </button>
       </div>
 
       {showForm && (
-        <div className="mb-4 p-4 bg-blue-50 rounded-lg border border-blue-100">
+        <div className="mb-4 p-4 bg-green-50 rounded-lg border border-green-100">
           <div className="flex items-center justify-between mb-3">
-            <h4 className="text-sm font-semibold text-blue-800">
+            <h4 className="text-sm font-semibold text-green-800">
               {editing ? "Edit Customer" : "New Customer"}
             </h4>
             <button
@@ -158,7 +158,7 @@ function CustomerManager() {
                 onChange={(e) =>
                   setForm((f) => ({ ...f, name: e.target.value }))
                 }
-                className="w-full px-3 py-1.5 text-sm border border-[#e2e8f0] rounded bg-white focus:outline-none focus:border-blue-400"
+                className="w-full px-3 py-1.5 text-sm border border-[#e2e8f0] rounded bg-white focus:outline-none focus:border-green-400"
               />
               {errors.name && (
                 <p className="text-red-500 text-xs">{errors.name}</p>
@@ -177,7 +177,7 @@ function CustomerManager() {
                 onChange={(e) =>
                   setForm((f) => ({ ...f, phone: e.target.value }))
                 }
-                className="w-full px-3 py-1.5 text-sm border border-[#e2e8f0] rounded bg-white focus:outline-none focus:border-blue-400"
+                className="w-full px-3 py-1.5 text-sm border border-[#e2e8f0] rounded bg-white focus:outline-none focus:border-green-400"
               />
             </div>
             <div className="col-span-2">
@@ -193,7 +193,7 @@ function CustomerManager() {
                 onChange={(e) =>
                   setForm((f) => ({ ...f, address: e.target.value }))
                 }
-                className="w-full px-3 py-1.5 text-sm border border-[#e2e8f0] rounded bg-white focus:outline-none focus:border-blue-400"
+                className="w-full px-3 py-1.5 text-sm border border-[#e2e8f0] rounded bg-white focus:outline-none focus:border-green-400"
               />
             </div>
             <div>
@@ -209,7 +209,7 @@ function CustomerManager() {
                 onChange={(e) =>
                   setForm((f) => ({ ...f, gst: e.target.value }))
                 }
-                className="w-full px-3 py-1.5 text-sm border border-[#e2e8f0] rounded bg-white focus:outline-none focus:border-blue-400"
+                className="w-full px-3 py-1.5 text-sm border border-[#e2e8f0] rounded bg-white focus:outline-none focus:border-green-400"
               />
             </div>
             <div>
@@ -230,7 +230,7 @@ function CustomerManager() {
                     openingBalance: Number(e.target.value),
                   }))
                 }
-                className="w-full px-3 py-1.5 text-sm border border-[#e2e8f0] rounded bg-white focus:outline-none focus:border-blue-400"
+                className="w-full px-3 py-1.5 text-sm border border-[#e2e8f0] rounded bg-white focus:outline-none focus:border-green-400"
               />
             </div>
           </div>
@@ -245,7 +245,7 @@ function CustomerManager() {
             <button
               type="button"
               onClick={handleSave}
-              className="flex items-center gap-1 px-4 py-1.5 bg-blue-600 text-white text-sm rounded hover:bg-blue-700"
+              className="flex items-center gap-1 px-4 py-1.5 bg-green-600 text-white text-sm rounded hover:bg-green-700"
             >
               <Save size={13} /> Save
             </button>
@@ -307,7 +307,7 @@ function CustomerManager() {
                         <button
                           type="button"
                           onClick={() => openEdit(c)}
-                          className="p-1 text-blue-500 hover:text-blue-700 hover:bg-blue-50 rounded"
+                          className="p-1 text-green-500 hover:text-green-700 hover:bg-green-50 rounded"
                         >
                           <Edit2 size={13} />
                         </button>
@@ -377,7 +377,7 @@ function CustomerManager() {
                     customerSales.map((sale) => (
                       <tr key={sale.id}>
                         <td>{format(parseISO(sale.date), "dd MMM yyyy")}</td>
-                        <td className="font-mono text-blue-700">
+                        <td className="font-mono text-green-700">
                           {sale.billNumber}
                         </td>
                         <td className="text-right font-semibold text-green-700">
@@ -501,7 +501,7 @@ function SupplierManager() {
         <button
           type="button"
           onClick={openAdd}
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white rounded text-sm font-medium hover:bg-blue-700"
+          className="flex items-center gap-1.5 px-3 py-1.5 bg-green-600 text-white rounded text-sm font-medium hover:bg-green-700"
         >
           <Plus size={14} /> Add Supplier
         </button>
@@ -684,7 +684,7 @@ function SupplierManager() {
                         <button
                           type="button"
                           onClick={() => openEdit(s)}
-                          className="p-1 text-blue-500 hover:text-blue-700 hover:bg-blue-50 rounded"
+                          className="p-1 text-green-500 hover:text-green-700 hover:bg-green-50 rounded"
                         >
                           <Edit2 size={13} />
                         </button>
@@ -796,14 +796,14 @@ export function PartyManagement() {
           <button
             type="button"
             onClick={() => setActiveTab("customers")}
-            className={`px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors ${activeTab === "customers" ? "border-blue-600 text-blue-700" : "border-transparent text-slate-500 hover:text-slate-700"}`}
+            className={`px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors ${activeTab === "customers" ? "border-green-600 text-green-700" : "border-transparent text-slate-500 hover:text-slate-700"}`}
           >
             Customers
           </button>
           <button
             type="button"
             onClick={() => setActiveTab("suppliers")}
-            className={`px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors ${activeTab === "suppliers" ? "border-blue-600 text-blue-700" : "border-transparent text-slate-500 hover:text-slate-700"}`}
+            className={`px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors ${activeTab === "suppliers" ? "border-green-600 text-green-700" : "border-transparent text-slate-500 hover:text-slate-700"}`}
           >
             Suppliers
           </button>

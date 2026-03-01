@@ -135,7 +135,7 @@ export function StockManagement() {
         </div>
         <div className="bg-white rounded-lg border border-[#e2e8f0] p-3">
           <p className="text-xs text-slate-500">Stock Value</p>
-          <p className="text-xl font-bold text-blue-700">
+          <p className="text-xl font-bold text-green-700">
             {formatCurrency(totalStockValue)}
           </p>
         </div>
@@ -163,13 +163,13 @@ export function StockManagement() {
               placeholder="Search products..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-8 pr-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+              className="w-full pl-8 pr-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
             />
           </div>
           <select
             value={filterCategory}
             onChange={(e) => setFilterCategory(e.target.value)}
-            className="px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+            className="px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
           >
             <option value="">All Categories</option>
             {settings.categories.map((c) => (
@@ -181,7 +181,7 @@ export function StockManagement() {
           <button
             type="button"
             onClick={openAdd}
-            className="ml-auto flex items-center gap-1.5 px-3 py-2 bg-blue-600 text-white rounded text-sm font-medium hover:bg-blue-700 transition-colors"
+            className="ml-auto flex items-center gap-1.5 px-3 py-2 bg-green-600 text-white rounded text-sm font-medium hover:bg-green-700 transition-colors"
           >
             <Plus size={15} /> Add Product
           </button>
@@ -218,7 +218,7 @@ export function StockManagement() {
                     <tr key={p.id}>
                       <td className="font-medium text-slate-800">{p.name}</td>
                       <td>
-                        <span className="px-2 py-0.5 bg-blue-50 text-blue-700 rounded text-xs">
+                        <span className="px-2 py-0.5 bg-green-50 text-green-700 rounded text-xs">
                           {p.category}
                         </span>
                       </td>
@@ -234,7 +234,7 @@ export function StockManagement() {
                       <td className="text-right text-slate-700">
                         {formatCurrency(p.sellingPrice)}
                       </td>
-                      <td className="text-right font-semibold text-blue-700">
+                      <td className="text-right font-semibold text-green-700">
                         {formatCurrency(p.quantity * p.costPrice)}
                       </td>
                       <td className="text-center text-slate-600">
@@ -256,7 +256,7 @@ export function StockManagement() {
                           <button
                             type="button"
                             onClick={() => openEdit(p)}
-                            className="p-1 text-blue-500 hover:text-blue-700 hover:bg-blue-50 rounded"
+                            className="p-1 text-green-500 hover:text-green-700 hover:bg-green-50 rounded"
                           >
                             <Edit2 size={14} />
                           </button>
@@ -308,7 +308,7 @@ export function StockManagement() {
                   onChange={(e) =>
                     setForm((f) => ({ ...f, name: e.target.value }))
                   }
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                   placeholder="Product name"
                 />
                 {errors.name && (
@@ -328,7 +328,7 @@ export function StockManagement() {
                   onChange={(e) =>
                     setForm((f) => ({ ...f, category: e.target.value }))
                   }
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                 >
                   <option value="">Select category</option>
                   {settings.categories.map((c) => (
@@ -356,7 +356,7 @@ export function StockManagement() {
                   onChange={(e) =>
                     setForm((f) => ({ ...f, unit: e.target.value }))
                   }
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                 >
                   {UNITS.map((u) => (
                     <option key={u} value={u}>
@@ -383,7 +383,7 @@ export function StockManagement() {
                       costPrice: Number(e.target.value),
                     }))
                   }
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                 />
                 {errors.costPrice && (
                   <p className="text-red-500 text-xs mt-0.5">
@@ -409,7 +409,7 @@ export function StockManagement() {
                       sellingPrice: Number(e.target.value),
                     }))
                   }
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                 />
               </div>
               <div>
@@ -427,7 +427,7 @@ export function StockManagement() {
                   onChange={(e) =>
                     setForm((f) => ({ ...f, quantity: Number(e.target.value) }))
                   }
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                 />
               </div>
               <div>
@@ -448,7 +448,7 @@ export function StockManagement() {
                       minStockLevel: Number(e.target.value),
                     }))
                   }
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                 />
               </div>
             </div>
@@ -463,7 +463,7 @@ export function StockManagement() {
               <button
                 type="button"
                 onClick={handleSave}
-                className="flex items-center gap-1.5 px-5 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700"
+                className="flex items-center gap-1.5 px-5 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700"
               >
                 <Save size={14} /> {editingProduct ? "Update" : "Add Product"}
               </button>

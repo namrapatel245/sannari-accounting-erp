@@ -185,13 +185,13 @@ export function ExpenseManagement() {
                 placeholder="Search..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-8 pr-3 py-1.5 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                className="w-full pl-8 pr-3 py-1.5 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
               />
             </div>
             <select
               value={filterCategory}
               onChange={(e) => setFilterCategory(e.target.value)}
-              className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+              className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
             >
               <option value="">All Categories</option>
               {settings.expenseCategories.map((c) => (
@@ -204,13 +204,13 @@ export function ExpenseManagement() {
               type="date"
               value={filterFrom}
               onChange={(e) => setFilterFrom(e.target.value)}
-              className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+              className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
             />
             <input
               type="date"
               value={filterTo}
               onChange={(e) => setFilterTo(e.target.value)}
-              className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+              className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
             />
             <button
               type="button"
@@ -424,7 +424,7 @@ export function ExpenseManagement() {
                           <button
                             type="button"
                             onClick={() => openEdit(e)}
-                            className="p-1 text-blue-500 hover:text-blue-700 hover:bg-blue-50 rounded"
+                            className="p-1 text-green-500 hover:text-green-700 hover:bg-green-50 rounded"
                           >
                             <Edit2 size={13} />
                           </button>

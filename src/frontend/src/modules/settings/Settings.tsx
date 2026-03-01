@@ -118,7 +118,7 @@ function PartyManager<
         <button
           type="button"
           onClick={openAdd}
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white rounded text-sm font-medium hover:bg-blue-700"
+          className="flex items-center gap-1.5 px-3 py-1.5 bg-green-600 text-white rounded text-sm font-medium hover:bg-green-700"
         >
           <Plus size={14} /> Add {entityName}
         </button>
@@ -126,9 +126,9 @@ function PartyManager<
 
       {/* Form */}
       {showForm && (
-        <div className="mb-4 p-4 bg-blue-50 rounded-lg border border-blue-100">
+        <div className="mb-4 p-4 bg-green-50 rounded-lg border border-green-100">
           <div className="flex items-center justify-between mb-3">
-            <h4 className="text-sm font-semibold text-blue-800">
+            <h4 className="text-sm font-semibold text-green-800">
               {editing ? `Edit ${entityName}` : `New ${entityName}`}
             </h4>
             <button
@@ -152,7 +152,7 @@ function PartyManager<
                 onChange={(e) =>
                   setForm((f) => ({ ...f, name: e.target.value }))
                 }
-                className="w-full px-3 py-1.5 text-sm border border-[#e2e8f0] rounded bg-white focus:outline-none focus:border-blue-400"
+                className="w-full px-3 py-1.5 text-sm border border-[#e2e8f0] rounded bg-white focus:outline-none focus:border-green-400"
               />
               {errors.name && (
                 <p className="text-red-500 text-xs">{errors.name}</p>
@@ -170,7 +170,7 @@ function PartyManager<
                 onChange={(e) =>
                   setForm((f) => ({ ...f, phone: e.target.value }))
                 }
-                className="w-full px-3 py-1.5 text-sm border border-[#e2e8f0] rounded bg-white focus:outline-none focus:border-blue-400"
+                className="w-full px-3 py-1.5 text-sm border border-[#e2e8f0] rounded bg-white focus:outline-none focus:border-green-400"
               />
             </div>
             <div className="col-span-2">
@@ -185,7 +185,7 @@ function PartyManager<
                 onChange={(e) =>
                   setForm((f) => ({ ...f, address: e.target.value }))
                 }
-                className="w-full px-3 py-1.5 text-sm border border-[#e2e8f0] rounded bg-white focus:outline-none focus:border-blue-400"
+                className="w-full px-3 py-1.5 text-sm border border-[#e2e8f0] rounded bg-white focus:outline-none focus:border-green-400"
               />
             </div>
             <div>
@@ -200,7 +200,7 @@ function PartyManager<
                 onChange={(e) =>
                   setForm((f) => ({ ...f, gst: e.target.value }))
                 }
-                className="w-full px-3 py-1.5 text-sm border border-[#e2e8f0] rounded bg-white focus:outline-none focus:border-blue-400"
+                className="w-full px-3 py-1.5 text-sm border border-[#e2e8f0] rounded bg-white focus:outline-none focus:border-green-400"
               />
             </div>
           </div>
@@ -215,7 +215,7 @@ function PartyManager<
             <button
               type="button"
               onClick={handleSave}
-              className="flex items-center gap-1 px-4 py-1.5 bg-blue-600 text-white text-sm rounded hover:bg-blue-700"
+              className="flex items-center gap-1 px-4 py-1.5 bg-green-600 text-white text-sm rounded hover:bg-green-700"
             >
               <Save size={13} /> Save
             </button>
@@ -258,7 +258,7 @@ function PartyManager<
                       <button
                         type="button"
                         onClick={() => openEdit(item)}
-                        className="p-1 text-blue-500 hover:text-blue-700 hover:bg-blue-50 rounded"
+                        className="p-1 text-green-500 hover:text-green-700 hover:bg-green-50 rounded"
                       >
                         <Edit2 size={13} />
                       </button>
@@ -410,7 +410,7 @@ export function Settings() {
             onClick={() => setActiveTab(tab.key)}
             className={`px-4 py-3 text-sm font-medium border-b-2 -mb-px whitespace-nowrap transition-colors ${
               activeTab === tab.key
-                ? "border-blue-600 text-blue-700"
+                ? "border-green-600 text-green-700"
                 : "border-transparent text-slate-500 hover:text-slate-700"
             }`}
           >
@@ -439,7 +439,7 @@ export function Settings() {
                   onChange={(e) =>
                     setBizForm((f) => ({ ...f, businessName: e.target.value }))
                   }
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                 />
               </div>
               <div className="col-span-2">
@@ -455,7 +455,7 @@ export function Settings() {
                     setBizForm((f) => ({ ...f, address: e.target.value }))
                   }
                   rows={2}
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                 />
               </div>
               <div>
@@ -470,7 +470,7 @@ export function Settings() {
                   onChange={(e) =>
                     setBizForm((f) => ({ ...f, phone: e.target.value }))
                   }
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                 />
               </div>
               <div>
@@ -485,7 +485,7 @@ export function Settings() {
                   onChange={(e) =>
                     setBizForm((f) => ({ ...f, gst: e.target.value }))
                   }
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                 />
               </div>
               <div>
@@ -500,7 +500,7 @@ export function Settings() {
                   onChange={(e) =>
                     setBizForm((f) => ({ ...f, businessType: e.target.value }))
                   }
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                 />
               </div>
               <div>
@@ -520,7 +520,7 @@ export function Settings() {
                     }))
                   }
                   placeholder="+91 9876543210"
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                 />
                 <p className="text-xs text-slate-400 mt-0.5">
                   Used for invoice sharing via WhatsApp
@@ -585,7 +585,7 @@ export function Settings() {
             <button
               type="button"
               onClick={saveBusiness}
-              className="mt-4 flex items-center gap-1.5 px-5 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700"
+              className="mt-4 flex items-center gap-1.5 px-5 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700"
             >
               {bizSaved ? (
                 <>
@@ -633,13 +633,13 @@ export function Settings() {
                 {settings.categories.map((cat) => (
                   <div
                     key={cat}
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-full text-sm text-blue-800"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-green-50 border border-green-200 rounded-full text-sm text-green-800"
                   >
                     {cat}
                     <button
                       type="button"
                       onClick={() => deleteCategory(cat)}
-                      className="text-blue-400 hover:text-red-500 ml-0.5"
+                      className="text-green-400 hover:text-red-500 ml-0.5"
                     >
                       <X size={12} />
                     </button>
@@ -651,13 +651,13 @@ export function Settings() {
                   value={newCategory}
                   onChange={(e) => setNewCategory(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && addCategory()}
-                  className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                   placeholder="New category name"
                 />
                 <button
                   type="button"
                   onClick={addCategory}
-                  className="flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700"
+                  className="flex items-center gap-1 px-3 py-1.5 bg-green-600 text-white text-sm rounded-md hover:bg-green-700"
                 >
                   <Plus size={13} /> Add
                 </button>
@@ -690,7 +690,7 @@ export function Settings() {
                   value={newExpCategory}
                   onChange={(e) => setNewExpCategory(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && addExpCategory()}
-                  className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                   placeholder="New expense category"
                 />
                 <button
@@ -732,7 +732,7 @@ export function Settings() {
                     key={item.label}
                     className="bg-slate-50 rounded-md p-2 text-center"
                   >
-                    <div className="text-lg font-bold text-blue-700">
+                    <div className="text-lg font-bold text-green-700">
                       {item.count}
                     </div>
                     <div className="text-xs text-slate-500">{item.label}</div>
@@ -830,7 +830,7 @@ export function Settings() {
                   onChange={(e) =>
                     setBizForm((f) => ({ ...f, invoicePrefix: e.target.value }))
                   }
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                   placeholder="SAL"
                 />
                 <p className="text-xs text-slate-400 mt-0.5">
@@ -852,7 +852,7 @@ export function Settings() {
                       purchasePrefix: e.target.value,
                     }))
                   }
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                   placeholder="PUR"
                 />
                 <p className="text-xs text-slate-400 mt-0.5">
@@ -875,7 +875,7 @@ export function Settings() {
                     }))
                   }
                   rows={4}
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                   placeholder="Enter terms and conditions..."
                 />
               </div>
@@ -883,7 +883,7 @@ export function Settings() {
             <button
               type="button"
               onClick={saveBusiness}
-              className="mt-4 flex items-center gap-1.5 px-5 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700"
+              className="mt-4 flex items-center gap-1.5 px-5 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700"
             >
               {bizSaved ? (
                 <>

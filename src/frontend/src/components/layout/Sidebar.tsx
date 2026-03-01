@@ -96,7 +96,7 @@ export function Sidebar({ currentRoute, navigate }: SidebarProps) {
           sidebarCollapsed ? "px-3 py-4 justify-center" : "px-4 py-4",
         )}
       >
-        <div className="flex items-center justify-center w-8 h-8 rounded bg-blue-600 flex-shrink-0">
+        <div className="flex items-center justify-center w-8 h-8 rounded bg-green-600 flex-shrink-0">
           <Layers className="w-4 h-4 text-white" />
         </div>
         {!sidebarCollapsed && (
@@ -104,7 +104,7 @@ export function Sidebar({ currentRoute, navigate }: SidebarProps) {
             <div className="text-sm font-bold text-white leading-tight whitespace-nowrap">
               SANNARI
             </div>
-            <div className="text-[10px] text-blue-300 leading-tight whitespace-nowrap">
+            <div className="text-[10px] text-green-300 leading-tight whitespace-nowrap">
               Accounting ERP
             </div>
           </div>
@@ -143,7 +143,7 @@ export function Sidebar({ currentRoute, navigate }: SidebarProps) {
                       ? "px-0 py-2.5 justify-center mx-auto w-[44px]"
                       : "mx-2 px-3 py-2",
                     isActive
-                      ? "bg-blue-600 text-white"
+                      ? "bg-green-600 text-white"
                       : "text-slate-300 hover:bg-white/10 hover:text-white",
                   )}
                 >

@@ -189,7 +189,7 @@ export function PrintInvoice({ sale, settings, onClose }: PrintInvoiceProps) {
               <button
                 type="button"
                 onClick={handlePrint}
-                className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700"
+                className="flex items-center gap-1.5 px-4 py-2 bg-green-600 text-white rounded-md text-sm font-medium hover:bg-green-700"
               >
                 <Printer size={15} /> Print Invoice
               </button>
@@ -220,7 +220,7 @@ export function PrintInvoice({ sale, settings, onClose }: PrintInvoiceProps) {
                     className="h-16 w-auto object-contain flex-shrink-0"
                   />
                 ) : (
-                  <div className="h-14 w-14 rounded-lg bg-blue-600 flex items-center justify-center flex-shrink-0">
+                  <div className="h-14 w-14 rounded-lg bg-green-600 flex items-center justify-center flex-shrink-0">
                     <span className="text-white font-bold text-lg leading-none">
                       {initials}
                     </span>
@@ -245,7 +245,7 @@ export function PrintInvoice({ sale, settings, onClose }: PrintInvoiceProps) {
                 </div>
               </div>
               <div className="text-right">
-                <div className="bg-blue-600 text-white px-4 py-2 rounded-lg mb-2">
+                <div className="bg-green-600 text-white px-4 py-2 rounded-lg mb-2">
                   <p className="text-xs font-medium opacity-80">TAX INVOICE</p>
                 </div>
                 <div className="text-sm">
@@ -264,7 +264,7 @@ export function PrintInvoice({ sale, settings, onClose }: PrintInvoiceProps) {
             </div>
 
             {/* Divider */}
-            <div className="border-t-2 border-blue-600 mb-4" />
+            <div className="border-t-2 border-green-600 mb-4" />
 
             {/* Customer Details */}
             <div className="mb-5">
@@ -394,7 +394,7 @@ export function PrintInvoice({ sale, settings, onClose }: PrintInvoiceProps) {
                   <span className="text-base font-bold text-slate-900">
                     Grand Total:
                   </span>
-                  <span className="text-base font-bold text-blue-700">
+                  <span className="text-base font-bold text-green-700">
                     {formatCurrency(sale.totalAmount)}
                   </span>
                 </div>

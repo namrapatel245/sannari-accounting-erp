@@ -213,7 +213,7 @@ export function Transactions() {
                     onChange={(e) =>
                       setEditForm((f) => ({ ...f, date: e.target.value }))
                     }
-                    className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                    className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                   />
                   {editErrors.date && (
                     <p className="text-red-500 text-xs mt-0.5">
@@ -239,7 +239,7 @@ export function Transactions() {
                         amount: Number(e.target.value),
                       }))
                     }
-                    className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                    className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                   />
                   {editErrors.amount && (
                     <p className="text-red-500 text-xs mt-0.5">
@@ -261,7 +261,7 @@ export function Transactions() {
                   onChange={(e) =>
                     setEditForm((f) => ({ ...f, partyName: e.target.value }))
                   }
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                 />
               </div>
               <div>
@@ -280,7 +280,7 @@ export function Transactions() {
                       paymentMethod: e.target.value,
                     }))
                   }
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                 >
                   {PAYMENT_METHODS.map((m) => (
                     <option key={m}>{m}</option>
@@ -301,7 +301,7 @@ export function Transactions() {
                     setEditForm((f) => ({ ...f, notes: e.target.value }))
                   }
                   placeholder="Optional notes"
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md focus:outline-none focus:border-green-400"
                 />
               </div>
             </div>
@@ -316,7 +316,7 @@ export function Transactions() {
               <button
                 type="button"
                 onClick={handleSaveEdit}
-                className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700"
+                className="flex items-center gap-1.5 px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700"
               >
                 <Save size={14} /> Save Changes
               </button>
@@ -513,7 +513,7 @@ export function Transactions() {
                 setSearch(e.target.value);
                 setPage(1);
               }}
-              className="w-full pl-8 pr-3 py-1.5 text-sm border border-[#e2e8f0] rounded focus:outline-none focus:border-blue-400 bg-white"
+              className="w-full pl-8 pr-3 py-1.5 text-sm border border-[#e2e8f0] rounded focus:outline-none focus:border-green-400 bg-white"
             />
           </div>
           <input
@@ -523,7 +523,7 @@ export function Transactions() {
               setFilterFrom(e.target.value);
               setPage(1);
             }}
-            className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded focus:outline-none focus:border-blue-400 bg-white"
+            className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded focus:outline-none focus:border-green-400 bg-white"
           />
           <input
             type="date"
@@ -532,7 +532,7 @@ export function Transactions() {
               setFilterTo(e.target.value);
               setPage(1);
             }}
-            className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded focus:outline-none focus:border-blue-400 bg-white"
+            className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded focus:outline-none focus:border-green-400 bg-white"
           />
           <div className="flex rounded border border-[#e2e8f0] overflow-hidden">
             {(["All", "Sale", "Purchase", "Expense"] as FilterType[]).map(
@@ -544,7 +544,7 @@ export function Transactions() {
                     setFilterType(type);
                     setPage(1);
                   }}
-                  className={`px-3 py-1.5 text-xs font-medium transition-colors ${filterType === type ? "bg-blue-600 text-white" : "bg-white text-slate-600 hover:bg-slate-50"}`}
+                  className={`px-3 py-1.5 text-xs font-medium transition-colors ${filterType === type ? "bg-green-600 text-white" : "bg-white text-slate-600 hover:bg-slate-50"}`}
                 >
                   {type}
                 </button>
@@ -557,7 +557,7 @@ export function Transactions() {
               setFilterPayment(e.target.value);
               setPage(1);
             }}
-            className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded focus:outline-none focus:border-blue-400 bg-white"
+            className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded focus:outline-none focus:border-green-400 bg-white"
           >
             <option value="">All Payments</option>
             <option>Cash</option>
@@ -633,7 +633,7 @@ export function Transactions() {
                         {t.type}
                       </span>
                     </td>
-                    <td className="px-4 py-2.5 font-mono text-xs text-blue-700">
+                    <td className="px-4 py-2.5 font-mono text-xs text-green-700">
                       {t.referenceNumber}
                     </td>
                     <td className="px-4 py-2.5 font-medium text-slate-800">
@@ -656,7 +656,7 @@ export function Transactions() {
                           t.paymentMethod === "Cash"
                             ? "bg-slate-100 text-slate-600"
                             : t.paymentMethod === "Bank"
-                              ? "bg-blue-50 text-blue-600"
+                              ? "bg-green-50 text-green-600"
                               : t.paymentMethod === "UPI"
                                 ? "bg-purple-50 text-purple-600"
                                 : "bg-amber-50 text-amber-600"
@@ -674,7 +674,7 @@ export function Transactions() {
                           type="button"
                           onClick={() => openEditTxn(t)}
                           title="Edit transaction"
-                          className="p-1 text-blue-500 hover:text-blue-700 hover:bg-blue-50 rounded transition-colors"
+                          className="p-1 text-green-500 hover:text-green-700 hover:bg-green-50 rounded transition-colors"
                         >
                           <Edit2 size={13} />
                         </button>

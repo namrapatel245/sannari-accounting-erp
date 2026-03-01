@@ -121,14 +121,14 @@ export function StockAdjustment() {
           <button
             type="button"
             onClick={() => setShowForm(!showForm)}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white rounded text-sm font-medium hover:bg-blue-700"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-green-600 text-white rounded text-sm font-medium hover:bg-green-700"
           >
             <Plus size={14} /> New Adjustment
           </button>
         </div>
 
         {showForm && (
-          <div className="p-5 border-b border-[#e2e8f0] bg-blue-50/30">
+          <div className="p-5 border-b border-[#e2e8f0] bg-green-50/30">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-semibold text-slate-800">
                 New Stock Adjustment
@@ -156,7 +156,7 @@ export function StockAdjustment() {
                   onChange={(e) =>
                     setForm((f) => ({ ...f, productId: e.target.value }))
                   }
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md bg-white focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md bg-white focus:outline-none focus:border-green-400"
                 >
                   <option value="">Select product</option>
                   {products.map((p) => (
@@ -221,7 +221,7 @@ export function StockAdjustment() {
                   onChange={(e) =>
                     setForm((f) => ({ ...f, quantity: Number(e.target.value) }))
                   }
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md bg-white focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md bg-white focus:outline-none focus:border-green-400"
                 />
                 {errors.quantity && (
                   <p className="text-red-500 text-xs mt-0.5">
@@ -244,7 +244,7 @@ export function StockAdjustment() {
                   onChange={(e) =>
                     setForm((f) => ({ ...f, date: e.target.value }))
                   }
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md bg-white focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md bg-white focus:outline-none focus:border-green-400"
                 />
               </div>
 
@@ -261,7 +261,7 @@ export function StockAdjustment() {
                   onChange={(e) =>
                     setForm((f) => ({ ...f, reason: e.target.value }))
                   }
-                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md bg-white focus:outline-none focus:border-blue-400"
+                  className="w-full px-3 py-2 text-sm border border-[#e2e8f0] rounded-md bg-white focus:outline-none focus:border-green-400"
                   placeholder="e.g. Stock count correction, damaged goods, production surplus..."
                 />
                 {errors.reason && (
@@ -323,7 +323,7 @@ export function StockAdjustment() {
               <button
                 type="button"
                 onClick={handleSave}
-                className="flex items-center gap-1.5 px-5 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700"
+                className="flex items-center gap-1.5 px-5 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700"
               >
                 <Save size={14} /> Save Adjustment
               </button>

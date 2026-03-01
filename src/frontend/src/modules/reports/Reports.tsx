@@ -26,7 +26,7 @@ import {
 } from "../../utils/helpers";
 
 const COLORS = [
-  "#1e40af",
+  "#166534",
   "#16a34a",
   "#ea580c",
   "#7c3aed",
@@ -191,14 +191,14 @@ export function Reports() {
         type="date"
         value={dateFrom}
         onChange={(e) => setDateFrom(e.target.value)}
-        className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded focus:outline-none focus:border-blue-400"
+        className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded focus:outline-none focus:border-green-400"
       />
       <span className="text-slate-400 text-sm">to</span>
       <input
         type="date"
         value={dateTo}
         onChange={(e) => setDateTo(e.target.value)}
-        className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded focus:outline-none focus:border-blue-400"
+        className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded focus:outline-none focus:border-green-400"
       />
       {(dateFrom || dateTo) && (
         <button
@@ -246,7 +246,7 @@ export function Reports() {
               onClick={() => setActiveTab(tab.key)}
               className={`px-4 py-3 text-sm font-medium border-b-2 -mb-px whitespace-nowrap transition-colors ${
                 activeTab === tab.key
-                  ? "border-blue-600 text-blue-700"
+                  ? "border-green-600 text-green-700"
                   : "border-transparent text-slate-500 hover:text-slate-700"
               }`}
             >
@@ -276,13 +276,13 @@ export function Reports() {
                     width={55}
                   />
                   <Tooltip formatter={(v: number) => formatCurrency(v)} />
-                  <Bar dataKey="Amount" fill="#1e40af" radius={[3, 3, 0, 0]} />
+                  <Bar dataKey="Amount" fill="#166534" radius={[3, 3, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
               <div className="flex gap-4 text-sm">
-                <div className="bg-blue-50 px-3 py-2 rounded-md">
+                <div className="bg-green-50 px-3 py-2 rounded-md">
                   <span className="text-slate-600">Total: </span>
-                  <strong className="text-blue-700">
+                  <strong className="text-green-700">
                     {formatCurrency(
                       filteredSales.reduce((s, x) => s + x.totalAmount, 0),
                     )}
@@ -320,7 +320,7 @@ export function Reports() {
                     {filteredSales.slice(0, 50).map((s) => (
                       <tr key={s.id}>
                         <td>{format(parseISO(s.date), "dd MMM yyyy")}</td>
-                        <td className="font-mono text-blue-700">
+                        <td className="font-mono text-green-700">
                           {s.billNumber}
                         </td>
                         <td className="font-medium">{s.customerName}</td>
@@ -434,7 +434,7 @@ export function Reports() {
                   <Line
                     type="monotone"
                     dataKey="Sales"
-                    stroke="#1e40af"
+                    stroke="#166534"
                     strokeWidth={2}
                     dot={{ r: 2 }}
                   />
@@ -477,7 +477,7 @@ export function Reports() {
                     {pnlData.map((row) => (
                       <tr key={row.label}>
                         <td className="font-medium">{row.label}</td>
-                        <td className="text-right text-blue-700">
+                        <td className="text-right text-green-700">
                           {formatCurrency(row.Sales)}
                         </td>
                         <td className="text-right text-orange-600">
@@ -502,7 +502,7 @@ export function Reports() {
                   <tfoot className="bg-slate-50 font-bold">
                     <tr>
                       <td className="px-4 py-2">Total</td>
-                      <td className="px-4 py-2 text-right text-blue-700">
+                      <td className="px-4 py-2 text-right text-green-700">
                         {formatCurrency(
                           pnlData.reduce((s, r) => s + r.Sales, 0),
                         )}
@@ -542,9 +542,9 @@ export function Reports() {
                 <ReportActions />
               </div>
               <div className="flex gap-4 text-sm mb-3">
-                <div className="bg-blue-50 px-3 py-2 rounded-md">
+                <div className="bg-green-50 px-3 py-2 rounded-md">
                   <span className="text-slate-600">Total Value: </span>
-                  <strong className="text-blue-700">
+                  <strong className="text-green-700">
                     {formatCurrency(
                       products.reduce(
                         (s, p) => s + p.quantity * p.costPrice,
@@ -593,7 +593,7 @@ export function Reports() {
                           <td className="text-right">
                             {formatCurrency(p.costPrice)}
                           </td>
-                          <td className="text-right text-blue-700 font-semibold">
+                          <td className="text-right text-green-700 font-semibold">
                             {formatCurrency(p.quantity * p.costPrice)}
                           </td>
                           <td className="text-right">{p.minStockLevel}</td>
@@ -733,7 +733,7 @@ export function Reports() {
                     <select
                       value={selectedYear}
                       onChange={(e) => setSelectedYear(Number(e.target.value))}
-                      className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded focus:outline-none focus:border-blue-400"
+                      className="px-3 py-1.5 text-sm border border-[#e2e8f0] rounded focus:outline-none focus:border-green-400"
                     >
                       {[2022, 2023, 2024, 2025].map((y) => (
                         <option key={y} value={y}>
@@ -756,7 +756,7 @@ export function Reports() {
                   />
                   <Tooltip formatter={(v: number) => formatCurrency(v)} />
                   <Legend wrapperStyle={{ fontSize: 11 }} />
-                  <Bar dataKey="Sales" fill="#1e40af" radius={[2, 2, 0, 0]} />
+                  <Bar dataKey="Sales" fill="#166534" radius={[2, 2, 0, 0]} />
                   <Bar
                     dataKey="Purchases"
                     fill="#ea580c"
@@ -789,7 +789,7 @@ export function Reports() {
                     {monthlySummaryData.map((row) => (
                       <tr key={row.label}>
                         <td className="font-medium">{row.label}</td>
-                        <td className="text-right text-blue-700">
+                        <td className="text-right text-green-700">
                           {formatCurrency(row.Sales)}
                         </td>
                         <td className="text-right text-orange-600">
